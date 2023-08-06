@@ -1,0 +1,33 @@
+apiVersion: berg.norelect.ch/v1
+kind: Challenge
+metadata:
+  name: CHALLENGE_NAME_HERE
+  namespace: berg
+spec:
+  categories:
+    - crypto
+    - whatever
+  difficulty: baby/easy/medium/hard
+  author: YOUR_USERNAME_HERE
+  allowOutboundTraffic: false
+  flag: flag{YOUR_FLAG_HERE}
+  flagFormat: flag{...}
+  description: |
+    Please add a challenge description here to add some context.
+    This description can be multiline and supports <u>html</u> tags.
+  containers:
+    - hostname: HOSTNAME_HERE
+      image: ghcr.io/GITHUB_OWNER/GITHUB_REPOSITORY/CHALLENGE_NAME_HERE:latest
+      environment:
+        WHATEVER: VALUE
+      resourceLimits:
+        cpu: "0.2"
+        memory: "100m"
+      ports:
+        - port: 80
+          protocol: tcp
+          appProtocol: http
+          type: publicIngressRouteTcp
+  attachments:
+    - fileName: CHALLENGE_NAME_HERE.tar.gz
+      downloadUrl: /handouts/CHALLENGE_NAME_HERE.tar.gz
