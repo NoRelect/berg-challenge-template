@@ -22,7 +22,7 @@ spec:
         WHATEVER: VALUE
       resourceLimits:
         cpu: "0.2"
-        memory: "100m"
+        memory: "100Mi"
       ports:
         - port: 80
           protocol: tcp
