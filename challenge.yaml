@@ -7,13 +7,14 @@ spec:
   categories:
     - crypto
     - whatever
-  difficulty: baby/easy/medium/hard
+  difficulty: baby # Must be one of baby/easy/medium/hard/leet
   author: YOUR_USERNAME_HERE
+  # Change to true if your challenge requires a reverse shell or other form of data exfiltration
   allowOutboundTraffic: false
   flag: flag{YOUR_FLAG_HERE}
   flagFormat: flag{...}
   description: |
-    Please add a challenge description here to add some context.
+    Please add a challenge description here to add some context.<br />
     This description can be multiline and supports <u>html</u> tags.
   containers:
     - hostname: HOSTNAME_HERE
@@ -25,9 +26,14 @@ spec:
         memory: "100Mi"
       ports:
         - port: 80
-          protocol: tcp
-          appProtocol: http
-          type: publicIngressRouteTcp
+          protocol: tcp # Must be either tcp/udp
+          appProtocol: http # Signal to the frontend how to connect. For web services, use http. If unsure, use tcp.
+          # Port type can be one of:
+          # - publicHttpRoute: Expose this service via HTTPS with automatic HTTP to HTTPS redirection
+          # - publicTlsRoute: Expose this service via a TLS-wrapped access
+          # - publicPort: Expose this service on a random high port
+          # - internalPort: Only expose this port for other containers, not to the public
+          type: publicHttpRoute
   attachments:
     - fileName: CHALLENGE_NAME_HERE.tar.gz
       downloadUrl: /handouts/CHALLENGE_NAME_HERE.tar.gz
